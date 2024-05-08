@@ -54,3 +54,33 @@
   font-roboto text-sm leading-[22px] font-normal text-center text-customBlack
   transition-opacity ease-out duration-300 hover:opacity-80;
 }
+
+.cardText {
+  @apply font-roboto text-xs leading-6 font-normal text-left text-customBlack;
+}
+
+.difficultyStarContainer {
+  @apply flex gap-x-0.5;
+}
+
+.recipeCardList {
+  @apply grid grid-cols-3 grid-rows-2 gap-x-3 gap-y-2 xlarge:grid-cols-2 tablet:grid-cols-1;
+}
+
+.paginationButton {
+  @apply min-h-8 h-8 max-w-8 w-full px-[7px] py-[1px] bg-white box-border border-solid rounded-sm
+  border-lightGray font-roboto text-sm leading-[22px] font-normal text-customBlack;
+}
+
+.paginationDotButton {
+  @apply min-h-8 h-8 max-w-8 w-full px-2 border-none font-roboto text-sm leading-8
+   font-normal text-center tracking-[2px] text-black25;
+}
+
+.paginationBtnActive {
+  @apply border-blue font-medium text-blue;
+}
+
+/* .paginationButton:active {
+  @apply border-blue font-medium text-blue bg-white;
+} */

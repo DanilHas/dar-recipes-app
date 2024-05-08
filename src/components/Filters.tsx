@@ -60,7 +60,7 @@ export default function Filters() {
             className="join-item btn radio-button"
             type="radio"
             name="options"
-            aria-label="Low"
+            aria-label="Easy"
           />
           <input
             className="join-item btn radio-button"
@@ -72,7 +72,7 @@ export default function Filters() {
             className="join-item btn radio-button"
             type="radio"
             name="options"
-            aria-label="High"
+            aria-label="Hard"
           />
         </div>
       </div>
