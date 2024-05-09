@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
-import { recipeApi } from "../services/recipeService";
 import {
   nextPage,
   prevPage,
@@ -12,20 +11,19 @@ export default function Pagination() {
   const { recipesPerPage, totalPages, currentPage } = useAppSelector(
     (state) => state.pagination
   );
+  const { filteredRecipes } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
-  const { data } = recipeApi.useGetAllRecipesQuery(50);
-  const allRecipes = data?.recipes;
 
   useEffect(() => {
-    if (allRecipes) {
+    if (filteredRecipes) {
       const calculatedTotalPages = Math.ceil(
-        allRecipes.length / recipesPerPage
+        filteredRecipes.length / recipesPerPage
       );
       dispatch(
         setTotalPages(calculatedTotalPages > 0 ? calculatedTotalPages : 1)
       );
     }
-  }, [allRecipes?.length, recipesPerPage]);
+  }, [filteredRecipes.length, recipesPerPage]);
 
   const handlePageChange = (pageNumber: number): void => {
     dispatch(setCurrentPage(pageNumber));
@@ -122,26 +120,30 @@ export default function Pagination() {
   };
 
   return (
-    <ul className="join w-full flex justify-center mt-6 mb-3 gap-x-2">
-      <li className="max-w-8 w-full">
-        <button
-          className="join-item btn paginationButton"
-          onClick={() => dispatch(prevPage())}
-          disabled={currentPage === 1}
-        >
-          «
-        </button>
-      </li>
-      {renderPageNumbers()}
-      <li className="max-w-8 w-full">
-        <button
-          className="join-item btn paginationButton"
-          onClick={() => dispatch(nextPage())}
-          disabled={currentPage === totalPages}
-        >
-          »
-        </button>
-      </li>
-    </ul>
+    <>
+      {filteredRecipes.length > 0 && (
+        <ul className="join w-full flex justify-center mt-6 mb-3 gap-x-2">
+          <li className="max-w-8 w-full">
+            <button
+              className="join-item btn paginationButton"
+              onClick={() => dispatch(prevPage())}
+              disabled={currentPage === 1}
+            >
+              «
+            </button>
+          </li>
+          {renderPageNumbers()}
+          <li className="max-w-8 w-full">
+            <button
+              className="join-item btn paginationButton"
+              onClick={() => dispatch(nextPage())}
+              disabled={currentPage === totalPages}
+            >
+              »
+            </button>
+          </li>
+        </ul>
+      )}
+    </>
   );
 }
