@@ -38,6 +38,7 @@ export default function Pagination() {
         pageNumbers.push(
           <li key={i} className="max-w-8 w-full">
             <button
+              type="button"
               className={`join-item btn paginationButton ${
                 currentPage === i ? "paginationBtnActive" : ""
               }`}
@@ -59,6 +60,7 @@ export default function Pagination() {
         pageNumbers.push(
           <li key={1} className="max-w-8 w-full">
             <button
+              type="button"
               className="join-item btn paginationButton"
               onClick={() => handlePageChange(1)}
             >
@@ -70,7 +72,10 @@ export default function Pagination() {
       if (start > 2) {
         pageNumbers.push(
           <li key="dotStart" className="max-w-8 w-full">
-            <button className="join-item btn btn-disabled paginationDotButton">
+            <button
+              type="button"
+              className="join-item btn btn-disabled paginationDotButton"
+            >
               ...
             </button>
           </li>
@@ -81,6 +86,7 @@ export default function Pagination() {
         pageNumbers.push(
           <li key={i} className="max-w-8 w-full">
             <button
+              type="button"
               className={`join-item btn paginationButton ${
                 currentPage === i ? "paginationBtnActive" : ""
               }`}
@@ -96,7 +102,10 @@ export default function Pagination() {
         if (end < totalPages - 1) {
           pageNumbers.push(
             <li key="dotEnd" className="max-w-8 w-full">
-              <button className="join-item btn btn-disabled paginationDotButton">
+              <button
+                type="button"
+                className="join-item btn btn-disabled paginationDotButton"
+              >
                 ...
               </button>
             </li>
@@ -105,6 +114,7 @@ export default function Pagination() {
         pageNumbers.push(
           <li key={totalPages} className="max-w-8 w-full">
             <button
+              type="button"
               className={`join-item btn paginationButton ${
                 currentPage === totalPages ? "paginationBtnActive" : ""
               }`}
@@ -125,6 +135,7 @@ export default function Pagination() {
         <ul className="join w-full flex justify-center mt-6 mb-3 gap-x-2">
           <li className="max-w-8 w-full">
             <button
+              type="button"
               className="join-item btn paginationButton"
               onClick={() => dispatch(prevPage())}
               disabled={currentPage === 1}
@@ -135,6 +146,7 @@ export default function Pagination() {
           {renderPageNumbers()}
           <li className="max-w-8 w-full">
             <button
+              type="button"
               className="join-item btn paginationButton"
               onClick={() => dispatch(nextPage())}
               disabled={currentPage === totalPages}

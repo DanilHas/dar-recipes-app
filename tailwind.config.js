@@ -22,6 +22,7 @@ export default {
       },
       boxShadow: {
         customShadow: "0px 2px 0px 0px rgba(0, 0, 0, 0.02)",
+        characteristicTitle: "inset 0px -1px 0px 0px rgb(240, 240, 240);",
       },
     },
   },
