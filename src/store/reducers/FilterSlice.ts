@@ -6,6 +6,7 @@ interface FilterState {
   mealType: string;
   difficulty: string;
   filteredRecipes: Recipe[];
+  isFilterActive: boolean;
 }
 
 const initialState: FilterState = {
@@ -13,6 +14,7 @@ const initialState: FilterState = {
   mealType: "All types",
   difficulty: "Any",
   filteredRecipes: [],
+  isFilterActive: false,
 };
 
 export const filterSlice = createSlice({
@@ -31,9 +33,17 @@ export const filterSlice = createSlice({
     setDifficulty: (state, action: PayloadAction<string>) => {
       state.difficulty = action.payload;
     },
+    setFilterActive: (state, action: PayloadAction<boolean>) => {
+      state.isFilterActive = action.payload;
+    },
   },
 });
 
-export const { setFilteredRecipes, setCuisine, setMealType, setDifficulty } =
-  filterSlice.actions;
+export const {
+  setFilteredRecipes,
+  setCuisine,
+  setMealType,
+  setDifficulty,
+  setFilterActive,
+} = filterSlice.actions;
 export default filterSlice.reducer;

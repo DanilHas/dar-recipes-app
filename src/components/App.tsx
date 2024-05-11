@@ -6,6 +6,7 @@ import { useAppDispatch } from "../hooks/redux";
 import { recipeApi } from "../services/recipeService";
 import { setFilteredRecipes } from "../store/reducers/FilterSlice";
 import ScrollToTop from "./ScrollToTop";
+import NotFoundPage from "./NotFoundPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -31,6 +32,10 @@ function App() {
           <RecipePage />
         </>
       ),
+    },
+    {
+      path: "*",
+      element: <NotFoundPage />,
     },
   ]);
 

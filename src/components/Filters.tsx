@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { recipeApi } from "../services/recipeService";
 import {
   setCuisine,
   setDifficulty,
+  setFilterActive,
   setFilteredRecipes,
   setMealType,
 } from "../store/reducers/FilterSlice";
@@ -13,10 +14,9 @@ import { setCurrentPage } from "../store/reducers/PaginationSlice";
 export default function Filters() {
   const { data } = recipeApi.useGetAllRecipesQuery(50);
   const dispatch = useAppDispatch();
-  const { cuisine, mealType, difficulty } = useAppSelector(
+  const { cuisine, mealType, difficulty, isFilterActive } = useAppSelector(
     (state) => state.filter
   );
-  const [isFilterActive, setFilterActive] = useState<boolean>(false);
 
   const allRecipes = data?.recipes;
   const cuisines: string[] | undefined = allRecipes?.map(
@@ -57,17 +57,17 @@ export default function Filters() {
     if (e.target.name === "cuisine") {
       dispatch(setCuisine(e.target.value));
       dispatch(setCurrentPage(1));
-      setFilterActive(true);
+      dispatch(setFilterActive(true));
     } else if (e.target.name === "mealType") {
       dispatch(setMealType(e.target.value));
       dispatch(setCurrentPage(1));
-      setFilterActive(true);
+      dispatch(setFilterActive(true));
     } else {
       const ariaLabelValue = e.target.getAttribute("aria-label");
       if (ariaLabelValue !== null) {
         dispatch(setDifficulty(ariaLabelValue));
         dispatch(setCurrentPage(1));
-        setFilterActive(true);
+        dispatch(setFilterActive(true));
       }
     }
   };
@@ -79,7 +79,7 @@ export default function Filters() {
       mealType === "All types" &&
       difficulty === "Any"
     ) {
-      setFilterActive(false);
+      dispatch(setFilterActive(false));
     }
   }, [cuisine, mealType, difficulty]);
 
@@ -87,7 +87,7 @@ export default function Filters() {
     dispatch(setCuisine("All countries and regions"));
     dispatch(setMealType("All types"));
     dispatch(setDifficulty("Any"));
-    setFilterActive(false);
+    dispatch(setFilterActive(false));
   };
 
   return (
@@ -154,6 +154,7 @@ export default function Filters() {
             name="options"
             aria-label="Easy"
             onChange={handleChange}
+            checked={difficulty === "Easy"}
           />
           <input
             className="join-item btn radio-button"
@@ -161,6 +162,7 @@ export default function Filters() {
             name="options"
             aria-label="Medium"
             onChange={handleChange}
+            checked={difficulty === "Medium"}
           />
           <input
             className="join-item btn radio-button"
@@ -168,6 +170,7 @@ export default function Filters() {
             name="options"
             aria-label="Hard"
             onChange={handleChange}
+            checked={difficulty === "Hard"}
           />
         </div>
       </div>

@@ -1,7 +1,14 @@
+import { Link } from "react-router-dom";
+import { useAppSelector } from "../hooks/redux";
 import recipeBook from "../images/recipe-book.jpg";
+import { Recipe } from "../models/Recipe";
 import Filters from "./Filters";
 
 export default function FilterSection() {
+  const { filteredRecipes } = useAppSelector((state) => state.filter);
+  const randomRecipe: Recipe =
+    filteredRecipes[Math.floor(Math.random() * filteredRecipes.length)];
+
   return (
     <section
       className="p-6 mt-3 bg-white max-w-[24.5%] tablet:p-3
@@ -37,9 +44,12 @@ export default function FilterSection() {
       <p className="mt-12 mb-6 text-black font-roboto text-base font-normal text-left">
         You can also taste luck
       </p>
-      <button type="button" className="luckyButton">
+      <Link
+        to={randomRecipe ? `/recipes/${randomRecipe.id}` : "/"}
+        className="luckyButton"
+      >
         I'll be lucky!
-      </button>
+      </Link>
     </section>
   );
 }
