@@ -1,8 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux";
 import { Recipe } from "../../models/Recipe";
 import buttonArrow from "../../images/button-arrow.svg";
 import CurrentRecipeSection from "../CurrentRecipeSection";
+import { useEffect, useState } from "react";
+import { recipeApi } from "../../services/recipeService";
 
 export default function RecipePage() {
   const { recipeId } = useParams<string>();
@@ -10,6 +12,21 @@ export default function RecipePage() {
   const currentRecipe: Recipe | undefined = filteredRecipes.find(
     (recipe) => recipe.id === Number(recipeId)
   );
+  const { isLoading, error } = recipeApi.useGetAllRecipesQuery(50);
+  const navigate = useNavigate();
+  const [isDataLoaded, setDataLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (filteredRecipes && !isLoading && !error) {
+      setDataLoaded(true);
+    }
+  }, [filteredRecipes, isLoading, error]);
+
+  useEffect(() => {
+    if (isDataLoaded && !currentRecipe) {
+      navigate("*");
+    }
+  }, [currentRecipe, isDataLoaded, navigate]);
 
   return (
     <>

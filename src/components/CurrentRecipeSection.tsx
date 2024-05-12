@@ -11,7 +11,7 @@ export default function CurrentRecipeSection({
   currentRecipe,
 }: CurrentRecipeSectionProps) {
   return (
-    <section className="flex bg-white gap-x-3">
+    <section className="flex gap-x-3">
       <div className="grid h-[852px] gap-3 currentRecipeContainer">
         <RecipeCharacteristic
           title="Cuisine"
@@ -50,7 +50,7 @@ export default function CurrentRecipeSection({
           style="font-normal"
           area="prepTime"
         />
-        <div className="pt-4" style={{ gridArea: "instructions" }}>
+        <div className="pt-4 bg-white" style={{ gridArea: "instructions" }}>
           <h2
             className="pb-4 shadow-characteristicTitle font-roboto text-base
             font-medium text-left text-customBlack px-6"

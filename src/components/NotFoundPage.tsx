@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function NotFoundPage() {
-  const navigate = useNavigate();
-  const goBack = () => navigate(-1);
-
   return (
     <main className="w-full max-w-full flex flex-col items-center pt-60 pb-16">
       <h1
@@ -18,14 +15,13 @@ export default function NotFoundPage() {
       >
         Страница не найдена
       </p>
-      <button
-        type="button"
+      <Link
+        to={"/"}
         className="text-center text-sm leading-normal font-normal
         transition-opacity ease-out duration-300 hover:opacity-80"
-        onClick={goBack}
       >
-        Назад
-      </button>
+        На главную
+      </Link>
     </main>
   );
 }
