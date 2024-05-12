@@ -28,10 +28,10 @@
 
 - React/React-hooks;
 - React Router;
-- Redux Toolkit/RTK Query
-- TypeScript
-- Tailwind
-- daisyUI
+- Redux Toolkit/RTK Query;
+- TypeScript;
+- Tailwind;
+- daisyUI;
 
 ## Ссылка на проект
 
